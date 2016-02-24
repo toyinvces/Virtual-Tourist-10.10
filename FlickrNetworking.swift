@@ -29,31 +29,45 @@ class FlickerNetworking : UIViewController {
     
     var photo: Photo!
     
-    
-//    func createBoundingBoxString() -> String {
-//        
-//        let latitude = 41.8461 as Double//(self.latitudeTextField.text! as NSString).doubleValue
-//        let longitude = -87.8297 as Double//(self.longitudeTextField.text! as NSString).doubleValue
-//        
-//        let bottom_left_lon = (longitude - 0.02)
-//        let bottom_left_lat = (latitude - 0.02)
-//        let top_right_lon = (longitude + 0.02)
-//        let top_right_lat = (latitude + 0.02)
-//        
-//        return "\(bottom_left_lon),\(bottom_left_lat),\(top_right_lon),\(top_right_lat)"
-//    }
+
     
     
-  //  func getImageFromFlickrBySearchWithPage(methodArguments: [String : AnyObject], pageNumber: Int, completionHandler: (success: Bool, photo: UIImage?, errorString: AnyObject?) -> Void) {
+    func createBoundingBoxString(lati: Double?, long: Double?) -> String {
         
+        print(lati, long)
+
+        
+        let latitude = lati!
+        let longitude = long!
+        
+        let bottom_left_lon = (longitude - 0.02)
+        let bottom_left_lat = (latitude - 0.02)
+        let top_right_lon = (longitude + 0.02)
+        let top_right_lat = (latitude + 0.02)
+        
+        return "\(bottom_left_lon),\(bottom_left_lat),\(top_right_lon),\(top_right_lat)"
+    }
+    
+    
  
-func getImageFromFlickrBySearchWithPage(methodArguments: [String : AnyObject], pageNumber: Int, completionHandler: (success: Bool, parsedResult: AnyObject?, errorString: AnyObject?) -> Void) {
-            
-            
+    func getImageFromFlickrBySearchWithPage( lati: Double?, long: Double?, completionHandler: (success: Bool, photoUrls: [String], errorString: AnyObject?) -> Void) {
         
+        
+        print("here i am")
+    
+    let methodArguments = [
+        "method": METHOD_NAME,
+        "api_key": API_KEY,
+        "bbox": createBoundingBoxString(lati, long: long),
+        "safe_search": SAFE_SEARCH,
+        "extras": EXTRAS,
+        "format": DATA_FORMAT,
+        "nojsoncallback": NO_JSON_CALLBACK
+    ]
+    
         /* Add the page to the method's arguments */
         var withPageDictionary = methodArguments
-        withPageDictionary["page"] = pageNumber
+        withPageDictionary["page"] = String(1)
         
         let session = NSURLSession.sharedSession()
         let urlString = BASE_URL + escapedParameters(withPageDictionary)
@@ -61,6 +75,9 @@ func getImageFromFlickrBySearchWithPage(methodArguments: [String : AnyObject], p
         let request = NSURLRequest(URL: url)
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            var photoUrls : [String] = [String]()
+
             
             /* GUARD: Was there an error? */
             guard (error == nil) else {
@@ -91,7 +108,7 @@ func getImageFromFlickrBySearchWithPage(methodArguments: [String : AnyObject], p
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
                 
-              //  print(parsedResult)
+            //    print(parsedResult)
                 
             } catch {
                 parsedResult = nil
@@ -105,118 +122,229 @@ func getImageFromFlickrBySearchWithPage(methodArguments: [String : AnyObject], p
                 return
             }
             
-            /* GUARD: Is the "photos" key in our result? */
-            guard let photosDictionary = parsedResult["photos"] as? NSDictionary else {
-                print("Cannot find key 'photos' in \(parsedResult)")
-                return
-            }
             
-            /* GUARD: Is the "total" key in photosDictionary? */
-            guard let totalPhotosVal = (photosDictionary["total"] as? NSString)?.integerValue else {
-                print("Cannot find key 'total' in \(photosDictionary)")
-                return
-            }
-            
-        ///    for index in 1...10 {
+            if let photosDictionary = parsedResult["photos"] as? [String : AnyObject] {
                 
-        //        print(index)
+              //  print(photosDictionary)
                 
-                if totalPhotosVal > 0 {
-                    
-                    /* GUARD: Is the "photo" key in photosDictionary? */
-                    guard let photosArray = photosDictionary["photo"] as? [[String: AnyObject]] else {
-                        print("Cannot find key 'photo' in \(photosDictionary)")
-                        return
-                    }
-                    
-                    
-                    //                let randomPhotoIndex = Int(arc4random_uniform(UInt32(photosArray.count)))
-                    //                let photoDictionary = photosArray[randomPhotoIndex] as [String: AnyObject]
-                    //                let photoTitle = photoDictionary["title"] as? String /* non-fatal */
-                    //
-                    
-                    
-                    // print("\(index) times 5 is \(index * 5)")
-                    
-                    //let randomPhotoIndex = (photosArray.count)
-                    let randomPhotoIndex = Int(arc4random_uniform(UInt32(photosArray.count)))
-                    let photoDictionary = photosArray[randomPhotoIndex] as [String: AnyObject]
-                    
-                    //  let photoDictionary = photosArray as [String: AnyObject]
-                    
-                    let photoTitle = photoDictionary["title"] as? String /* non-fatal */
-                    
-                    /* GUARD: Does our photo have a key for 'url_m'? */
-                    guard let imageUrlString = photoDictionary["url_m"] as? String else {
-                        print("Cannot find key 'url_m' in \(photoDictionary)")
-                        return
-                    }
-                    
-                    let imageURL = NSURL(string: imageUrlString)
-                    if let imageData = NSData(contentsOfURL: imageURL!) {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            
-                      //      print(imageUrlString)
-                            
-                     //       let photo = UIImage(data: imageData)
-
-                           // let photo = UIImage(data: imageData)
-                            
-                        //    completionHandler(success: true, parsedResult: parsedResult,   errorString: "success")
-
-                            
-                           //    print(imageUrlString)
-                            
-                            
-                       //     let photo = UIImage(data: imageData)
-                            
-                            //    print(imageUrlString)
-                            
-//                            let pictures = Photo(photo : photo!)
-//                            (UIApplication.sharedApplication().delegate as! AppDelegate).photos.append(pictures)
-//                            
-                            
-                            
-                     //    let photourl = imageUrlString
-              //              print(photourl)
-                            
-
-                            
-                    //     (UIApplication.sharedApplication().delegate as! AppDelegate).photos.append(pictures)
-                            
-                            if methodArguments["bbox"] != nil {
-                                if let photoTitle = photoTitle {
-                                    //                self.photoTitleLabel.text = " \(photoTitle)"
-                                } else {
-                                    //                self.photoTitleLabel.text = "(Untitled)"
-                                }
-                            } else {
-                                //            self.photoTitleLabel.text = photoTitle ?? "(Untitled)"
-                            }
-                        })
-                    } else {
-                        print("Image does not exist at \(imageURL)")
-                    }
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), {
+//                // Determine number of photos
+//                let numPhotos : Int
+//                if let totalPhotosVal = photosDictionary["total"] as? String {
+//                    numPhotos = (totalPhotosVal as NSString).integerValue
+//                } else {
+//                    numPhotos = 0
+//                }
+//                
+//                print("Found \(numPhotos) photos")
+//                
+//                if numPhotos > 0 {
+                
+                    // Get URLs for photos
+                    if let photosArray = photosDictionary["photo"] as? [[String : AnyObject]] {
                         
-                        //                    self.photoTitleLabel.text = "No Photos Found. Search Again."
-                        //                    self.defaultLabel.alpha = 1.0
-                        //                    self.photoImageView.image = nil
-                    })
-                    
-                    
-                }
-          ////////  }
-             completionHandler(success: true, parsedResult: parsedResult,   errorString: "success")
+                        print("photosDictionary contains \(photosArray.count) photos")
+                        
+                        // Return array of up to 24 randomly selected photo URLs
+//                        let maxPhotosToReturn = 24
+//                        let numPhotosToReturn = min(maxPhotosToReturn, photosArray.count)
+//                        
+//                        let randomArrayIndices = self.getRandomIndicesWithArraySize(photosArray.count)
+//                        
+                        for index in 1 ... 10 {
+                            
+                            let randomPhotoIndex = Int(arc4random_uniform(UInt32(photosArray.count)))
+                            
+                            let photoURL = photosArray[randomPhotoIndex]
+                            
+                            if let photoUrlString = photoURL["url_m"] as? String {
+                                
+                                photoUrls.append(photoUrlString)
+                                
+                            }
+                        }
+                        
+                    }
+             //   }
+                
+              //  success = true
+                
+            } else {
+                print("Error. Could not find \"photos\" object in JSON result.")
+            }
+            
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(success: true, photoUrls: photoUrls, errorString: "none")
+            }
         }
         
-      //  completionHandler(success: true, errorString: "success")
-
-       //  completionHandler(success: true, parsedResult: parsedResult,   errorString: "success")
-        
         task.resume()
+       
     }
+    
+            
+            
+            
+//            /* GUARD: Is the "photos" key in our result? */
+//            guard let photosDictionary = parsedResult["photos"] as? NSDictionary else {
+//                print("Cannot find key 'photos' in \(parsedResult)")
+//                return
+//            }
+//            
+//            /* GUARD: Is the "total" key in photosDictionary? */
+//            guard let totalPhotosVal = (photosDictionary["total"] as? NSString)?.integerValue else {
+//                print("Cannot find key 'total' in \(photosDictionary)")
+//                return
+//            }
+//            
+//          for index in 1...10 {
+//                
+//        //        print(index)
+//                
+//           //     if totalPhotosVal > 0 {
+//                    
+//                    /* GUARD: Is the "photo" key in photosDictionary? */
+//                    guard let photosArray = photosDictionary["photo"] as? [[String: AnyObject]] else {
+//                        print("Cannot find key 'photo' in \(photosDictionary)")
+//                        return
+//                    }
+//            
+//            let randomPhotoIndex = Int(arc4random_uniform(UInt32(photosArray.count)))
+//            
+//             let photoDictionary = photosArray[randomPhotoIndex] as [String: AnyObject]
+//            
+//             let photosArrayy = photosDictionary["photo"] as? [[String : AnyObject]]
+//
+//            
+//            
+//            
+//            
+//            
+//                                if let photoUrlString = photosArrayy["url_m"] as? String {
+//            
+//                                    photoUrls.append(photoUrlString)
+//            
+//                                }
+//            
+//            
+//            
+//            
+//            
+//                    //                let randomPhotoIndex = Int(arc4random_uniform(UInt32(photosArray.count)))
+//                    //                let photoDictionary = photosArray[randomPhotoIndex] as [String: AnyObject]
+//                    //                let photoTitle = photoDictionary["title"] as? String /* non-fatal */
+//                    //
+//                    
+//                    
+//                    // print("\(index) times 5 is \(index * 5)")
+//                    
+//                    //let randomPhotoIndex = (photosArray.count)
+//                    let randomPhotoIndex = Int(arc4random_uniform(UInt32(photosArray.count)))
+//                    let photoDictionary = photosArray[randomPhotoIndex] as [String: AnyObject]
+//                    
+//                    //  let photoDictionary = photosArray as [String: AnyObject]
+//                    
+//                    let photoTitle = photoDictionary["title"] as? String /* non-fatal */
+//                    
+//                    /* GUARD: Does our photo have a key for 'url_m'? */
+//                    guard let imageUrlString = photoDictionary["url_m"] as? String else {
+//                        print("Cannot find key 'url_m' in \(photoDictionary)")
+//                        return
+//                    }
+////            
+////            if let photosArray = photosDictionary["photo"] as? [[String : AnyObject]] {
+////                
+////                print("photosDictionary contains \(photosArray.count) photos")
+////                
+////                // Return array of up to 24 randomly selected photo URLs
+////                let maxPhotosToReturn = 24
+////                let numPhotosToReturn = min(maxPhotosToReturn, photosArray.count)
+////                
+////                let randomArrayIndices = self.getRandomIndicesWithArraySize(photosArray.count)
+////                
+////                for i in 0 ..< numPhotosToReturn {
+////                    
+////                    let photoMetaData = photosArray[ randomArrayIndices[i] ]
+////                    
+////                    if let photoUrlString = photoMetaData["url_m"] as? String {
+////                        
+////                        photoUrls.append(photoUrlString)
+////                        
+////                    }
+////                }
+////                
+////            }
+////            }
+//
+//            
+//                 //   let imageURL = NSURL(string: imageUrlString)
+//            
+//            
+//            
+////                    if let imageData = NSData(contentsOfURL: imageURL!) {
+////                        dispatch_async(dispatch_get_main_queue(), {
+////                            
+////                      //      print(imageUrlString)
+////                            
+////                     //       let photo = UIImage(data: imageData)
+////
+////                           // let photo = UIImage(data: imageData)
+////                            
+////                        //    completionHandler(success: true, parsedResult: parsedResult,   errorString: "success")
+////
+////                            
+////                           //    print(imageUrlString)
+////                            
+////                            
+////                       //     let photo = UIImage(data: imageData)
+////                            
+////                            //    print(imageUrlString)
+////                            
+//////                            let pictures = Photo(photo : photo!)
+//////                            (UIApplication.sharedApplication().delegate as! AppDelegate).photos.append(pictures)
+//////                            
+////                            
+////                            
+////                     //    let photourl = imageUrlString
+////              //              print(photourl)
+////                            
+////
+////                            
+////                    //     (UIApplication.sharedApplication().delegate as! AppDelegate).photos.append(pictures)
+////                            
+////                            if methodArguments["bbox"] != nil {
+////                                if let photoTitle = photoTitle {
+////                                    //                self.photoTitleLabel.text = " \(photoTitle)"
+////                                } else {
+////                                    //                self.photoTitleLabel.text = "(Untitled)"
+////                                }
+////                            } else {
+////                                //            self.photoTitleLabel.text = photoTitle ?? "(Untitled)"
+////                            }
+////                        })
+//////                    } else {
+////                        print("Image does not exist at \(imageURL)")
+////                    }
+////                } else {
+////                    dispatch_async(dispatch_get_main_queue(), {
+////                        
+////                        //                    self.photoTitleLabel.text = "No Photos Found. Search Again."
+////                        //                    self.defaultLabel.alpha = 1.0
+////                        //                    self.photoImageView.image = nil
+////                    })
+//                    
+//                    
+//             //   }
+//          //}
+//             completionHandler(success: true, photoUrls: imageUrlString,   errorString: "success")
+//        }
+//    }
+//      //  completionHandler(success: true, errorString: "success")
+//
+//       //  completionHandler(success: true, parsedResult: parsedResult,   errorString: "success")
+//        
+//        task.resume()
+  //  }
     
     
     
@@ -247,6 +375,11 @@ func getImageFromFlickrBySearchWithPage(methodArguments: [String : AnyObject], p
         
         return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
     }
+    
+    
+    
+    
+    
     
     struct Caches {
         static let imageCache = ImageCache()

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
+@objc(Photo)
 
 class Photo: NSManagedObject {
 
@@ -21,19 +22,27 @@ class Photo: NSManagedObject {
         
     }
     
+            @NSManaged var filePath: String?
+            @NSManaged var flickerPath: String?
+            @NSManaged var title: String?
+            @NSManaged var pin: Pin?
+    
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
+    
     }
-    init(dictionary: [String : AnyObject], context: NSManagedObjectContext) {
+    init(dictionary: String, context: NSManagedObjectContext) {
         
         // Core Data
         let entity =  NSEntityDescription.entityForName("Photo", inManagedObjectContext: context)!
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         
+        flickerPath = dictionary
+        filePath = dictionary
         
-        title = dictionary[keys.title] as? String
-        filePath = dictionary[keys.filePath] as? String
-        flickerPath = dictionary[keys.flickerPath] as? String
+//        title = dictionary[keys.title] as? String
+//        filePath = dictionary[keys.filePath] as? String
+//        flickerPath = dictionary[keys.flickerPath] as? String
         
     }
     
@@ -52,3 +61,6 @@ class Photo: NSManagedObject {
 
 
 }
+
+
+

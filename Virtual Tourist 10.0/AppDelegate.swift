@@ -11,11 +11,11 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-            var lat: Double!
+        var lat: Double!
         var long: Double!
     
     
-    var photos = [Photo]()
+  //  var photos = [Photo]()
     var pins = [Pin]()
     
 

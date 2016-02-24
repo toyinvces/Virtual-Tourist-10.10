@@ -15,8 +15,8 @@ class LocationAnnotation: NSObject, MKAnnotation {
     var pin: Pin
     
     init(pin: Pin) {
-        var lati = pin.latitude! as Double
-        var long = pin.longitude! as Double
+        var lati = pin.location.latitude
+        var long = pin.location.longitude
         
         self.coordinate = CLLocationCoordinate2DMake(lati,long)
         self.pin = pin

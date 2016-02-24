@@ -100,7 +100,7 @@
                             </mapView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3re-nC-A9p">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.080452673137187958" green="0.70967841148376465" blue="0.78618544340133667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="w6T-6e-xyA">
                                     <size key="itemSize" width="156" height="163"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -125,7 +125,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.080452673137187958" green="0.70967841148376465" blue="0.78618544340133667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <variation key="default">
                                             <mask key="subviews">
                                                 <exclude reference="LO5-Kj-NXN"/>
@@ -141,6 +141,9 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="209" width="400" height="391"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="fZP-SB-lA6" id="AE7-lo-Ncx"/>
                                 </connections>
@@ -175,25 +178,6 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="x3r-Jn-Kk3"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9f1-a8-Ej1">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="HIf-8Z-j6a"/>
-                                    <constraint firstAttribute="height" constant="91" id="R9H-J3-VWr"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="HIf-8Z-j6a"/>
-                                        <exclude reference="R9H-J3-VWr"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="HIf-8Z-j6a"/>
-                                        <include reference="R9H-J3-VWr"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCa-CV-jh2">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <constraints>
@@ -221,15 +205,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RfD-qj-oh0" firstAttribute="top" secondItem="Dn3-N5-zoD" secondAttribute="topMargin" id="1JT-kr-POP"/>
-                            <constraint firstItem="9f1-a8-Ej1" firstAttribute="leading" secondItem="Dn3-N5-zoD" secondAttribute="leadingMargin" constant="-20" id="2v6-7Y-jkd"/>
                             <constraint firstItem="RfD-qj-oh0" firstAttribute="leading" secondItem="Dn3-N5-zoD" secondAttribute="leadingMargin" constant="-20" id="EFI-ri-uF1"/>
                             <constraint firstItem="0Fq-zz-TEe" firstAttribute="top" secondItem="3re-nC-A9p" secondAttribute="bottom" id="Gg8-lZ-Bwe"/>
                             <constraint firstItem="FCa-CV-jh2" firstAttribute="top" secondItem="uAX-Mh-UbT" secondAttribute="bottom" constant="8" id="MT4-Nj-vU2"/>
                             <constraint firstItem="uAX-Mh-UbT" firstAttribute="top" secondItem="NZS-lc-Ovn" secondAttribute="bottom" constant="8" id="Nvd-Ul-A9k"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3re-nC-A9p" secondAttribute="trailing" constant="-20" id="Rln-9u-XTg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RfD-qj-oh0" secondAttribute="trailing" constant="-20" id="SRL-JB-m4K"/>
-                            <constraint firstItem="9f1-a8-Ej1" firstAttribute="top" secondItem="NZS-lc-Ovn" secondAttribute="bottom" constant="96" id="Vd0-hC-cBx"/>
-                            <constraint firstItem="3re-nC-A9p" firstAttribute="top" secondItem="9f1-a8-Ej1" secondAttribute="bottom" constant="2" id="jOA-Zu-QuS"/>
                             <constraint firstItem="uAX-Mh-UbT" firstAttribute="trailing" secondItem="Dn3-N5-zoD" secondAttribute="trailingMargin" id="t0I-T7-WT4"/>
                             <constraint firstItem="FCa-CV-jh2" firstAttribute="trailing" secondItem="Dn3-N5-zoD" secondAttribute="trailingMargin" id="wOA-Ha-9ng"/>
                             <constraint firstItem="3re-nC-A9p" firstAttribute="leading" secondItem="Dn3-N5-zoD" secondAttribute="leadingMargin" constant="-20" id="wxo-Mf-Ri7"/>
@@ -239,7 +220,6 @@
                                 <exclude reference="RfD-qj-oh0"/>
                                 <exclude reference="3re-nC-A9p"/>
                                 <exclude reference="uAX-Mh-UbT"/>
-                                <exclude reference="9f1-a8-Ej1"/>
                                 <exclude reference="FCa-CV-jh2"/>
                             </mask>
                             <mask key="constraints">
@@ -249,10 +229,7 @@
                                 <exclude reference="Nvd-Ul-A9k"/>
                                 <exclude reference="t0I-T7-WT4"/>
                                 <exclude reference="Rln-9u-XTg"/>
-                                <exclude reference="jOA-Zu-QuS"/>
                                 <exclude reference="wxo-Mf-Ri7"/>
-                                <exclude reference="2v6-7Y-jkd"/>
-                                <exclude reference="Vd0-hC-cBx"/>
                                 <exclude reference="1JT-kr-POP"/>
                                 <exclude reference="EFI-ri-uF1"/>
                                 <exclude reference="SRL-JB-m4K"/>
@@ -263,7 +240,6 @@
                                 <include reference="RfD-qj-oh0"/>
                                 <include reference="3re-nC-A9p"/>
                                 <include reference="uAX-Mh-UbT"/>
-                                <include reference="9f1-a8-Ej1"/>
                                 <include reference="FCa-CV-jh2"/>
                             </mask>
                             <mask key="constraints">
@@ -273,10 +249,7 @@
                                 <include reference="Nvd-Ul-A9k"/>
                                 <include reference="t0I-T7-WT4"/>
                                 <include reference="Rln-9u-XTg"/>
-                                <include reference="jOA-Zu-QuS"/>
                                 <include reference="wxo-Mf-Ri7"/>
-                                <include reference="2v6-7Y-jkd"/>
-                                <include reference="Vd0-hC-cBx"/>
                                 <include reference="1JT-kr-POP"/>
                                 <include reference="EFI-ri-uF1"/>
                                 <include reference="SRL-JB-m4K"/>
@@ -285,7 +258,6 @@
                     </view>
                     <connections>
                         <outlet property="mapKit" destination="RfD-qj-oh0" id="CUR-0V-wj1"/>
-                        <outlet property="testImage" destination="9f1-a8-Ej1" id="zAR-P3-Qpb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9IW-Vh-7LJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

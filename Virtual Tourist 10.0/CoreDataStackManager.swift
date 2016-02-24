@@ -5,34 +5,25 @@
 //  Created by Jason on 3/10/15.
 //  Copyright (c) 2015 Udacity. All rights reserved.
 //
-
 import Foundation
 import CoreData
 
-/**
- * The CoreDataStackManager contains the code that was previously living in the 
- * AppDelegate in Lesson 3. Apple puts the code in the AppDelegate in many of their
- * Xcode templates. But they put it in a convenience class like this in sample code
- * like the "Earthquakes" project.
- *
- */
+private let SQLITE_FILE_NAME = "VirtualTourist.sqlite"
 
-private let SQLITE_FILE_NAME = "Pins.sqlite"
-
+// -> Udacity FavoriteActors example
 class CoreDataStackManager {
-    
     
     // MARK: - Shared Instance
     
     /**
-     *  This class variable provides an easy way to get access
-     *  to a shared instance of the CoreDataStackManager class.
-     */
+    *  This class variable provides an easy way to get access
+    *  to a shared instance of the CoreDataStackManager class.
+    */
     class func sharedInstance() -> CoreDataStackManager {
         struct Static {
             static let instance = CoreDataStackManager()
         }
-    
+        
         return Static.instance
     }
     
@@ -48,7 +39,7 @@ class CoreDataStackManager {
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-
+        
         print("Instantiating the managedObjectModel property")
         
         let modelURL = NSBundle.mainBundle().URLForResource("CoreDataModel", withExtension: "momd")!
@@ -57,8 +48,8 @@ class CoreDataStackManager {
     
     /**
      * The Persistent Store Coordinator is an object that the Context uses to interact with the underlying file system. Usually
-     * the persistent store coordinator object uses an SQLite database file to save the managed objects. But it is possible to 
-     * configure it to use XML or other formats. 
+     * the persistent store coordinator object uses an SQLite database file to save the managed objects. But it is possible to
+     * configure it to use XML or other formats.
      *
      * Typically you will construct your persistent store manager exactly like this. It needs two pieces of information in order
      * to be set up:
@@ -87,7 +78,7 @@ class CoreDataStackManager {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             
-            dict[NSUnderlyingErrorKey] = error as! NSError
+            dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -105,7 +96,7 @@ class CoreDataStackManager {
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
-        }()
+    }()
     
     // MARK: - Core Data Saving support
     

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB4B42BA1C4034FD0018D177 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4B42B91C4034FD0018D177 /* Pin+CoreDataProperties.swift */; };
 		DB5A3E331C23AF3B003A5313 /* LocAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5A3E321C23AF3B003A5313 /* LocAnnotation.swift */; };
 		DB5B86151C449D000025445D /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5B86141C449D000025445D /* Photo+CoreDataProperties.swift */; };
 		DB82260E1C091C9E00D153CF /* flickerPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB82260D1C091C9E00D153CF /* flickerPath.swift */; };
@@ -46,7 +45,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DB4B42B91C4034FD0018D177 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		DB5A3E321C23AF3B003A5313 /* LocAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocAnnotation.swift; sourceTree = "<group>"; };
 		DB5B86141C449D000025445D /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Photo+CoreDataProperties.swift"; path = "../Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DB82260D1C091C9E00D153CF /* flickerPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = flickerPath.swift; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 				DB9C25131C0CCE3C0027D4C9 /* Pin.swift */,
 				DB9C25111C0CCE3C0027D4C9 /* Photo.swift */,
 				DB5B86141C449D000025445D /* Photo+CoreDataProperties.swift */,
-				DB4B42B91C4034FD0018D177 /* Pin+CoreDataProperties.swift */,
 				DB5A3E321C23AF3B003A5313 /* LocAnnotation.swift */,
 				DBBC46391C08AE8600BC117D /* CoreDataModel.xcdatamodeld */,
 			);
@@ -116,20 +113,20 @@
 		DBD2EFC51C726D8B000705A0 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				DB82260D1C091C9E00D153CF /* flickerPath.swift */,
 				DBEA257E1C0386DA002D8E6C /* FlickrNetworking.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
 		};
-		DBD2EFC61C726DA5000705A0 /* Views */ = {
+		DBD2EFC61C726DA5000705A0 /* Views Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				DBEA254E1C03822C002D8E6C /* ViewController.swift */,
 				DBEA25801C0387A9002D8E6C /* CollectionView.swift */,
 				DBEA25821C03880A002D8E6C /* CollectionViewCell.swift */,
-				DB82260D1C091C9E00D153CF /* flickerPath.swift */,
 			);
-			name = Views;
+			name = "Views Controllers";
 			sourceTree = "<group>";
 		};
 		DBD2EFC71C726DC5000705A0 /* Other */ = {
@@ -167,10 +164,10 @@
 		DBEA254B1C03822C002D8E6C /* Virtual Tourist 10.0 */ = {
 			isa = PBXGroup;
 			children = (
-				DBD2EFC71C726DC5000705A0 /* Other */,
-				DBD2EFC61C726DA5000705A0 /* Views */,
+				DBD2EFC61C726DA5000705A0 /* Views Controllers */,
 				DBD2EFC51C726D8B000705A0 /* Networking */,
 				DBD2EFC41C726D6F000705A0 /* Model */,
+				DBD2EFC71C726DC5000705A0 /* Other */,
 			);
 			path = "Virtual Tourist 10.0";
 			sourceTree = "<group>";
@@ -335,7 +332,6 @@
 				DBEA25831C03880A002D8E6C /* CollectionViewCell.swift in Sources */,
 				DB9C25171C0CCE3C0027D4C9 /* Pin.swift in Sources */,
 				DBBC463B1C08AE8700BC117D /* CoreDataModel.xcdatamodeld in Sources */,
-				DB4B42BA1C4034FD0018D177 /* Pin+CoreDataProperties.swift in Sources */,
 				DBEA254F1C03822C002D8E6C /* ViewController.swift in Sources */,
 				DBEA254D1C03822C002D8E6C /* AppDelegate.swift in Sources */,
 			);
