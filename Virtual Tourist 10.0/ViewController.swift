@@ -82,9 +82,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
             mapView.addAnnotation(newAnnotation)
             
             
-         //   _ = Pin(dictionary: latilong, context: sharedContext)
-            
-                   // let pinToAdd = Pin(dictionary: dictionary, context: self.sharedContext)
+
             let pinToAdd = Pin(dictionary: latilong, context: sharedContext)
             
             
@@ -94,73 +92,11 @@ class ViewController: UIViewController, MKMapViewDelegate {
             
             
     
-            
-            
-//        
-//        let touchPoint = gestureRecognizer.locationInView(self.mapView)
-//        let newCoord:CLLocationCoordinate2D = mapView.convertPoint(touchPoint, toCoordinateFromView: self.mapView)
-        
-        
-//        let object = UIApplication.sharedApplication().delegate as! AppDelegate
-//        let appDelegate = object as AppDelegate
-//        
-//        appDelegate.lat = newCoord.latitude
-//        appDelegate.long = newCoord.longitude
-////        
-//        lati = newCoord.latitude
-//        long = newCoord.longitude
-        
-//  
-//            let touchCoordinatesXY : CGPoint = gestureRecognizer.locationInView(mapView)
-//
-//            let latLonCoordinates = mapView.convertPoint(touchCoordinatesXY, toCoordinateFromView: mapView)
-//  
-//       // let pinToAdd = Pin(dictionary: dictionary, context: self.sharedContext)
-//          let pinToAdd = Pin(dictionary: latLonCoordinates, context: sharedContext)
-//            
-//            
-//     //   self.pins.append(pinToAdd)
-            
-            // Create a new Pin using the shared context
+
 
 
             
-////
-//            let newAnnotation = MKPointAnnotation()
-//            newAnnotation.coordinate = newCoord
-//            mapView.addAnnotation(newAnnotation)
-//            
-//            let touchCoordinatesXY : CGPoint = gestureRecognizer.locationInView(mapView)
-//
-//            let latLonCoordinates = mapView.convertPoint(touchCoordinatesXY, toCoordinateFromView: mapView)
-//            
-//      //      _ = Pin(dictionary: latLonCoordinates, context: sharedContext)
-//            
-//           let pinToAdd = Pin(dictionary: latLonCoordinates, context: self.sharedContext)
-////            
-////         //   let pinto = Pin(
-//           self.pins.append(pinToAdd)
-//           CoreDataStackManager.sharedInstance().saveContext()
-            
-            
-            
-//            newAnotation.coordinate = newCoord
-//            mapView.addAnnotation(newAnotation)
-//           var latLonPoint: CLLocationCoordinate2D.Type
-//            
-//            latLonPoint.longitude = lati
-//            
-//            
-//            let pinToAdd = Pin(dictionary: latLonPoint, context: sharedContext)
-//
-//    
-//            
-//            
-//            
-//            // Save the shared context using the convenience method in the CoreDataStackManager
-//            CoreDataStackManager.sharedInstance().saveContext()
-//            
-//        CoreDataStackManager.sharedInstance().saveContext()
+
     }
     }
     
@@ -240,22 +176,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
   
-//    func fetchAllPins() -> [Pin] {
-//        
-//        // Create the Fetch Request
-//        let fetchRequest = NSFetchRequest(entityName: Pin.Constants.EntityName)
-//        
-//        // Execute the Fetch Request
-//        do {
-//            return try sharedContext.executeFetchRequest(fetchRequest) as! [Pin]
-//            
-//        } catch let error as NSError {
-//            
-//            print("Error in fetchAllPins(): \(error)")
-//            return [Pin]()
-//            
-//        }
-//    }
+
     
     func fetchAllPins() -> [Pin] {
         // Create the fetch request
